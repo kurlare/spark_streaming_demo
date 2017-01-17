@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.6))"
+Export-Package: org.I0Itec.zkclient;version="0.8";uses:="javax.annotat
+ ion,org.I0Itec.zkclient.exception,org.I0Itec.zkclient.serialize,org.a
+ pache.log4j,org.apache.zookeeper,org.apache.zookeeper.data",org.I0Ite
+ c.zkclient.exception;version="0.8";uses:="org.apache.zookeeper",org.I
+ 0Itec.zkclient.serialize;version="0.8";uses:="org.I0Itec.zkclient.exc
+ eption",org.I0Itec.zkclient.util;version="0.8";uses:="org.I0Itec.zkcl
+ ient"
+Bundle-Version: 0.8
+Tool: Bnd-2.4.0.201411031534
+Bundle-Name: zkclient
+Bnd-LastModified: 1458139820000
+Created-By: 1.7.0_79 (Oracle Corporation)
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: com.101tec.zkclient
+Import-Package: javax.annotation,javax.security.auth.login,org.apache.
+ log4j,org.apache.zookeeper;version="[3.4,4)",org.apache.zookeeper.dat
+ a;version="[3.4,4)",org.apache.zookeeper.server;version="[3.4,4)"
+

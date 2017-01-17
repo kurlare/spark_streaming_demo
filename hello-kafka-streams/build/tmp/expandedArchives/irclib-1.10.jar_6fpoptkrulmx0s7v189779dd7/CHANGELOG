@@ -1,0 +1,406 @@
+Changelog of IRClib (IRC client library):
+
+IRClib 1.10 (03.11.2006):
+ * Changed: org.schwering.irc.lib.ssl.*. The new package is the new residence 
+            of the SSL IRC classes.
+            org.schwering.irc.lib.SSLIRCConnection and 
+            org.schwering.irc.lib.SSLDefaultTrustManager are deprecated.
+ * Added:   The interface IRCConstants contains the reply codes, error codes 
+            and mIRC color codes now. The interface is implemented by IRCUtil 
+            (thus, accessing the constants via IRCUtil still works) and by 
+            IRCEventListener (for less typing work).
+ * Changed: The mIRC color code fields in the IRCUtil class (like 
+            actionIndicator etc.) are deprecated. The new values are final 
+            and written in upper case with underscores (e.g. ACTION_INDICATOR).
+ * Changed: IRCEventListeners are fired from-last-to-first.
+ * Changed: There's only one release which contains the three licenses:
+            GNU LGPL, Eclipse Public License, Apache Software License.
+
+IRClib 1.04-epl (31.03.2006):
+ * Changed: Wrong documentation of onReply() and onError() Events: Your own
+            nickname is the first word in the _value_, not in the msg.
+ * Changed: Correct code formatting.
+ * Changed: IRCConnection.send() and IRCConnection.close prints an exception 
+            if one is thrown when transmitting a line to the server.
+
+IRClib 1.04-bsd (23.09.2005):
+ * Added:   IRClib is now additionally released under the Apache License 2.0.
+
+IRClib 1.04 (03.10.2004):
+ * Added:   IRCConnection.setEncoding sets the socket's character encoding.
+            Thanks to Daniel Wunsch.
+ * Added:   IRCConnection.getColors, IRCConnection.getPong, 
+            IRCConnection.getEncoding and IRCConnection.getTimeout which all 
+            belong to one set-method.
+ * Changed: The IRCUser.toString method now returns simply the nickname. That
+            makes it possible to add the IRCUser objects to JLists etc. without
+            a wrapper.
+ * Fixed:   The onDisconnect method could be invoked twice, if
+            IRCConnection.doQuit and IRCConnection.close were invoked immediately
+            after another.
+
+IRClib 1.03 (08.10.2003):
+ * Fixed:   The onMode(String channel, IRCUser user, IRCModeParser modes) had
+            a wrong IRCModeParser argument. Sorry.
+
+IRClib 1.02 (07.10.2003):
+ * Changed: Improved code-documentation for javadoc.
+ * Fixed:   The nick-update in the IRCConnection class wasn't case-insenstive.
+            However, that's just a theoretical bug; I have *never* seen a
+            server that changes nicks' case.
+ * Fixed:   IRClib crashed when the server sent empty lines (""). Stupid
+            servers :-). Thanks to Demian Rootring <http://www.rootring.com>.
+
+IRClib 1.01 (03.10.2003):
+ * Changed: Better performance for multiple listeners.
+ * Changed: IRClib leaved out the PASS command of the registration if the
+            password was null, empty or whitespace. Now you can force IRClib
+            to send the PASS command by setting whitespace (like " ") as
+            password. That might be useful on some servers, because RFC1459
+            says that *always* a PASS command must be send. However, the most
+            IRC servers send a not-enough-parameters reply when you send a PASS
+            command without a password.
+ * Fixed:   If a reply was received before the first PING? PONG!, the
+            onRegistered event was fired. So far so good, but it was fired
+            after the onReply event; now it's first the onRegistered and
+            then onReply.
+ * Fixed:   When a too long or special-char-containing nickname was set before
+            the registration is completed and accepted, the nickname is updated
+            in the IRCConnection. Caused bad errors, because IRClib didn't
+            know that the nickname was changed by the server sometimes.
+
+IRClib 1.00 (24.09.2003):
+ * Changed: Release-number. After 2^8 days of development, 1.00 is there.
+            Today the EU Parliament approved the amended version
+            of the directive about software patents.
+
+IRClib 0.91 (23.09.2003):
+ * Added:   IRCConnection.close method which closes the connection *brutally*
+            and *not* with the proper IRC command QUIT. This was the private
+            method disconnect until now. This method should be used if the
+            server doesn't react on QUIT commands anymore. Please check the
+            javadocs.
+ * Removed: IRCConnection.setDebug and all debug-functions.
+ * Changed: Improved code-documentation for javadoc.
+ * Fixed:   The IRCParser compared two ints (the current index and the possible
+            beginning of the trailing) when it wasn't necessary.
+ * Fixed:   The IRCConnection.isConnected method returned true even if the
+            connection was closed from one side.
+
+IRClib 0.90 (11.09.2003):
+ * Changed: The version policy: There's only one code of the IRClib. This code
+            runs under all Java versions since J2SE 1.2 and requires JSSE.
+            JSSE is no more required since J2SE 1.4. Some of this code is
+            deprecated since 1.4, but that doesn't matter.
+ * Changed: The TrustManager and X509TrustManager interfaces are now in package
+            com.sun.net.ssl. The methods of the X509TrustManager also have
+            changed. See the javadocs and/or tutorial.
+ * Fixed:   SSLIRCConnection threw AlgorithmNotFoundException in old Java
+            versions.
+ * Fixed:   The javadocs look much nicer if you use older versions of javadoc
+            now (because of much uglier HTML in them, that's paradox).
+
+IRClib 0.84 (03.09.2003):
+ * Added:   IRCConnection.getUsername method returns the username.
+ * Added:   IRCConnection.getPassword method returns the server-password.
+ * Removed: IRCConnection.updateNick has no sense anymore since the library
+            notices a nickchange before being registered itself. Read below.
+ * Changed: Rewrote all numeric replies and error replies in the IRCUtil class.
+            Now they are named same as in RFC1459 (with the ERR_ or RPL_) and
+            they are documentated (copied documentation from RFC1459 in most
+            cases).
+ * Changed: The IRCParser recognizes "moor   " as trailing in a string like that:
+            "nick     moor   ". Before, the IRCParser just returned the substring
+            from the last index to the ending of the line as trailing which is an
+            empty string in such a case.
+ * Changed: You do not need to invoke IRCConnection.updateNick to update the
+            nickname before being registered when you receive an nickname error
+            reply.
+ * Changed: IRCEventListener.onConnect is now known as
+            IRCEventListener.onRegistered because the new name better describes
+            the event.
+ * Changed: IRCEventListener.onDisconnect is now known as
+            IRCEventListener.onDisconnected because the new name makes it clear
+            that it's our connection which is broken.
+ * Changed: IRCConnection.getPort returns 0 instead of -1 if there's no
+            connection.
+ * Changed: Every IRClib version will consist of one Java 1.4 release and one
+            Java 1.3 + JSSE release.
+
+IRClib 0.83 (26.08.2003):
+ * Changed: All classes except SSLIRCConnection and SSLDefaultTrustManager are
+            Java 1.3 compliant. To convert the SSLIRCConnection and
+            SSLDefaultTrustManager classes into Java 1.3, you must download the
+            JSSE (Java Secure Socket Extensions) library, change some imports
+            and change the SSLDefaultTrustManager's methods. There'll be a small
+            text about how to do that at http://moepii.sf.net.
+ * Changed: IRCConnection.setNick is now known as IRCConnection updateNick
+            because this method is not used as normal set-methods. Its purpose
+            is very special; read the javadoc for it.
+ * Changed: Improved code-documentation for javadoc.
+ * Changed: Improved dirty code in IRCUtil.isChan method.
+ * Changed: SSLIRCConnection.removeTrustManager returns true if one was removed.
+ * Changed: Protected debugging method IRCConnection.print now invokes
+            printStackTrace if the transmitted object is an Exception.
+ * Changed: Before the calls of the debugging method print, it's checked wether
+            debugging is enabled or disabled, which is faster (the only exception
+            is in SSLIRCConnection.connect; this method calls the method print
+            and it's checked wether debugging is on or off).
+ * Changed: Some pieces of dirty code.
+ * Fixed:   Bug in IRCConnection.portRangeToArray: If the IRCConnection was
+            instantiated with the portrange constructor and not with the
+            portarray constructor, only one port was tried to connect.
+ * Fixed:   When getting disconnected the IRCConnection instance does not try to
+            send a second quit.
+
+IRClib 0.82 (17.08.2003):
+ * Added:   The IRCConnection.addIRCEventListener(IRCEventListener listener)
+            and IRCConnection.removeIRCEventListener(IRCEventListener listener)
+            methods.
+ * Removed: The IRCConnection.setEventListener(IRCEventListener listener).
+            Added a add- and remove-method instead.
+ * Changed: As you can see at the above points, IRClib now supports multiple
+            listeners.
+ * Changed: IRCEventListener now extends the java.util.EventListener interface.
+ * Changed: The methods IRCEventListener.onOther and IRCEventAdapter.onOther are
+            now known as IRCEventListener.unknown and IRCEventAdapter.unknown.
+ * Changed: The library is now distributed under the terms of the GNU LGPL!
+
+IRClib 0.81 (08.08.2003):
+ * Changed: The IRCParser and IRCModeParser use IRCUtil.split instead of a
+            StringTokenizer object to parse the parameters. That makes them
+            faster.
+ * Changed: The SSLIRCConnection might be a microlittlebit faster.
+ * Fixed:   The mIRC color code for reversed colors is now parsed out, too.
+ * Fixed:   The IRCConnection.connect and SSLIRCConnection.connect methods
+            possibly did not close sockets.
+ * Fixed:   Removed a useless imports in classes IRCModeParser and IRCUser.
+
+IRClib 0.80 (01.08.2003):
+ * Added:   Support for SSL connections!
+ * Added:   The SSLIRCConnection class which extends IRCConnection and uses
+            secure sockets.
+ * Added:   The SSLDefaultTrustManager class which truts the X509 key which is
+            used by all public IRC networks which support SSL I know.
+ * Changed: Turned arount the arguments of the IRCEventListener.onNotice and
+            IRCEventAdapter.onNotice methods: now first argument String target,
+            IRCUser user, String msg.
+ * Changed: The IRCConnection extends now Thread so that all methods provided by
+            Thread can be used directly.
+ * Changed: Some pieces of dirty code.
+
+IRClib 0.71 (23.07.2003):
+ * Added:   Constructors of IRCConnection: IRCConnection(String host, int[] 
+            ports, String pass, String nick, String username, String realname)
+            and IRCConnection(String host, int portMin, int portMax, String 
+            pass, String nick, String username, String realname).
+ * Added:   The argument username which replaces the stupid eMail in the whole
+            library.
+ * Removed: All other constructors.
+ * Removed  The eMail from the whole library. Instead added the username.
+ * Removed: The IRCUtil.getRandomString method which wasn't needed anymore 
+            because of the constructors are removed.
+ * Changed: With the new constructor, not only a portrange can be tested, but
+            also a number of ports like 256, 1024, 2048, 6667, 6668, 6669.
+ * Fixed:   Now the IRCConnection also connects to the last port of the 
+            portrange.
+
+IRClib 0.70 (20.07.2003):
+ * Added:   The IRCUser class which stores the nickname, username and hostname
+            of users.
+ * Added:   The IRCParser.getUser method which returns an IRCUser object. This
+            method is used by the IRCConnection from now on to transmit the
+            data about the active user to the listener.
+ * Added:   The IRCConnection.isDaemon method which returns true if the thread
+            is a daemon thread.
+ * Changed: The whole listening! Instead of the nickname, and sometimes
+            additionally the username and host, an IRCUser object is given as
+            argument to the events. Thus, the listener has always all available
+            information about the active user.
+ * Changed: The IRCParser.getUser method, which returned the username of the user
+            is now known as IRCParser.getUsername, because of the new
+            IRCParser.getUser.
+ * Fixed:   Removed an unwanted System.out.println from the IRCConnection.
+
+IRClib 0.63 (06.07.2003):
+ * Added:   IRCConnection.setDaemon sets the the thread as either daemon or user
+            thread. As a user thread, a reference to a IRCConnection object
+            prevents the JVM from exiting. NOTE: Until now, the thread was a
+            daemon thread; by default it's a user thread now! Therefore, you
+            probably must use setDaemon(true) in existing code. Otherwise, the
+            JVM wouldn't exit when you want it to do.
+ * Added:   IRCParser.getServername which is totally equal to IRCParser.getNick.
+            Thus this method makes no sense, but it's there because there's also
+            a <servername> part in the prefix which is the same as the nickname.
+ * Removed: The IRCParser.finalize method.
+ * Changed: No exceptions are printed out if debugging is disabled.
+ * Changed: IRCParser.indexOf and IRCParser.lastIndexOf do not try and catch
+            Exceptions anymore, because the index cannot be out of bounds,
+            because it's checked with an if.
+ * Changed: Now compiled under Java 1.4.2.
+ * Fixed:   The IRCParser's methods which work with the prefix (getNick,
+            getUser, getHost and new getServername) are now completely in
+            compliance with RFC1492: A line's prefix can look like this now:
+            <servername> | <nick> [ '!' <user> ] [ '@' <host> ]
+            And every method returns its part. getUser and getHost return
+            null if their parts are set and getNick and getServername are
+            totally equal. If no prefix is specified in the line, all of the
+            methods return null.
+ * Fixed:   The method IRCParser.getParametersTo didn't work.
+ * Fixed:   IRCParser behaved crazy when jumping over spaces.
+
+IRClib 0.62 (10.06.2003):
+ * Added:   IRCConnection.toString which contains some information about the
+            instance.
+ * Added:   IRCModeParser.toString which contains some information about the
+            instance.
+ * Added:   IRCParser.toString which contains some information about the
+            instance.
+ * Changed: Revised whole code of IRClib. Thus also optimized some small parts.
+ * Changed: IRCModeParser.parse is now declared 'private' instead of 'public'.
+ * Fixed:   The IRCParser ignores now spaces between prefix and command and
+            between command and middle as the RFC says.
+ * Fixed:   The IRCParser doesn't throw an exception when parsing a line without
+            any parameters.
+
+IRClib 0.61 (06.06.2003):
+ * Changed: IRCEventListener.onMessage is now known as
+            IRCEventListener.onPrivmsg.
+ * Changed: IRCConnection.doMsg is now known as IRCConnection.doPrivmsg.
+ * Changed: Optimized IRCUtil.getRandomString's speed.
+ * Fixed:   The onConnect event wasn't fired sometimes. Now the
+            IRCConnection.register method is invoked before the
+            IRCConnection.startGetThread method. Therefore the registration is
+            completed always before incoming lines are treated.
+
+IRClib 0.60 (03.06.2003):
+ * Added:   IRCConnection.setTimeout method which sets the timeout of the
+            socket. Default is 15 minutes.
+ * Removed: All constructors which had an IRCActionListener (now
+            IRCEventListener) object as argument.
+ * Removed: The deprecated IRCParser.getLeading method which was replaced with
+            IRCParser.getMiddle.
+ * Changed: The IRCConnection does not connect automatically when it's
+            instantiated! You must invoke IRCConnection.connect first!!
+ * Changed: IRCActionAdapter is now known as IRCEventAdapter. I'm sorry, but I
+            think event is the better word.
+ * Changed: IRCActionListener is now known as IRCEventListener. I'm sorry, but I
+            think event is the better word.
+ * Changed: IRCConnection.addIRCActionListener is now known as
+            IRCConnection.setEventListener. Its argument changed into
+            IRCEventListener, of course. I'm sorry, but the old name didn't
+            really describe what happend.
+ * Changed: The IRCUtil.parseColor is faster because the BOLD, UNDERLINE, ACTION
+            and COLOREND characters are parsed in the same loop as the
+            COLORSTART and its parameters.
+ * Changed: IRCConnection implements Runnable now instead of extending Thread.
+ * Fixed:   Early events are now always fired because connecting must be done
+            by invoking IRCConnection.connect; it's no more done automatically.
+ * Fixed:   IRCConnection.connect tries now all ports. If all ports (from
+            portMin to portMax) fail, the IOException is thrown.
+
+IRClib 0.52 (31.05.2003):
+ * Changed: The method IRCParser.getLeading is deprecated, use
+            IRCParser.getMiddle now. I wanted to be in compliance with the RFC's
+            names for the parts of a message.
+ * Changed: Improved IRCParser's code-documentation for javadoc.
+
+IRClib 0.51 (26.05.2003):
+ * Added:   The IRCParser.getParameterCount method which returns the count of
+            parameters (the trailing is one parameters independent from the
+            amount of words in the trailing).
+ * Added:   IRCConnection.setDebug to enable or disable console-output of
+            incoming and outgoing messages.
+ * Changed: IRCParser's code to get leading and trailing looks a little bit
+            different now.
+ * Changed: The getParam* methods of IRCParser are now named getParameter*.
+ * Fixed:   The onKick and onPart message argument is now "" if there isn't a
+            message.
+ * Fixed:   Some mistakes in documentation.
+
+IRClib 0.50 (21.05.2003):
+ * Added:   New IRCParser has now more than double speed.
+ * Added:   An onError event to IRClib for ERROR commands.
+ * Added:   Constructors of IRCConnection: IRCConnection(IRCActionListener
+            listener, String sHost, int iPortMin, int iPortMax, String sNick),
+            IRCConnection(IRCActionListener listener, String sHost, int
+            iPortMin, int iPortMax, String sPass, String sNick),
+            IRCConnection(IRCActionListener listener, String sHost, int
+            iPortMin, int iPortMax, String sPass, String sNick, String
+            sRealname, String sMail), IRCConnection(String sHost, int iPortMin,
+            int iPortMax, String sPass, String sNick). See IRClib's javadoc.
+ * Removed: Constructors of IRCConnection: IRCConnection(String sHost),
+            IRCConnection(String sHost, int iPortMin, int iPortMax),
+            IRCConnection(String sHost, int iPortMin, int iPortMax,
+            String sPass). See IRClib's javadoc.
+ * Removed: Method IRCConnection.setParamArgType.
+ * Removed: Method IRCParser.getParam().
+ * Removed: Method / event IRCActionListener.onOther(String prefix, String
+            command, String[] param).
+ * Changed: Changed onReply and onError numeric-reply-argument to type int.
+ * Changed: By default, mIRC color code is disabled in IRCConnection.
+ * Changed: Revised all javadoc comments in IRClib's code.
+ * Changed: Normton <normton at latinmail dot com> has revised the
+            IRCUtil.parseColors method for more speed (thanks to him).
+ * Changed: IRClib's constructor should now have the IRCActionListener as first
+            argument; otherwise you might miss the first one or two lines.
+ * Changed: Improved code-documentation for javadoc.
+ * Changed: Renamed IRCParser.getParamsTill into IRCParser.getParamsTo (hate
+            prepositions, is it right now?).
+
+IRClib 0.43 (13.05.2003):
+ * Fixed:   Changed many 'private'-modifiers which were not in compliance with
+            Java 1.4.1_02 into 'protected'.
+
+IRClib 0.42 (09.05.2003):
+ * Changed: Some 'abstract' and some 'protected' declarations.
+
+IRClib 0.41 (29.04.2003):
+ * Added:   An onConnect() event to IRClib which is fired when the first PING is
+            received.
+ * Changed: The start of the listening Thread in the IRCConnection a bit; has no
+            influence to the user.
+ * Fixed:   Noticed that indpendent isn't spelled independant. :-)
+
+IRClib 0.40 (12.04.2003):
+ * Changed: Extended documentation.
+ * Changed: Got some new icons and logos; thanks to Carsten Wiesbaum alias Radi
+            Skull <carsten.wiesbaum@web.de>.
+
+IRClib 0.31 (22.03.2003):
+ * Changed: The way how the colorcodes are parsed by the IRCParser-class much
+            faster.
+ * Fixed:   Bug in IRClib for networks which ignore case.
+ * Fixed:   Missing classes in manifest-file.
+
+IRClib 0.30 (14.03.2003):
+ * Fixed:   Some String-calculations like many indexOf-methods got faster
+            because of less stupid use.
+ * Fixed:   The client now can handle all types of channel names described in
+            RFC 2812: They may begin with #, &, !, +.
+ * Fixed:   Strange exception when joining a channel with an active key.
+
+IRClib 0.20 (04.03.2003):
+ * Added:   mIRC ColorCode chars are now available in class Util in ASCII code.
+ * Fixed:   Really many bugs in IRCConnection.
+ * Fixed:   Bugs in IRCModeParser.
+ * Fixed:   ColorCodes are now removed successfully.
+ * Fixed:   The nickname of the mode-changing user was null if the server
+            changed the mode.
+ * Fixed:   The mIRC ColorCode character for ending of all formatting (ASCII
+            decimal int: 15) is now parsed, too.
+ * Fixed:   Now eMail address is required by class IRCConnection, so that proper
+            authing is possible.
+
+IRClib 0.11 (06.02.2003):
+ * Dunno what I changed... probably almost everything.
+
+IRClib 0.10 (05.02.2003):
+ * First running release.
+
+IRClib 0.00 (12.01.2003):
+ * Started development of IRClib.
+
+IRClib 0.00 (22.09.2002):
+ * Began writing some code which was so stupid that it never had a chance to do
+   what I wanted.

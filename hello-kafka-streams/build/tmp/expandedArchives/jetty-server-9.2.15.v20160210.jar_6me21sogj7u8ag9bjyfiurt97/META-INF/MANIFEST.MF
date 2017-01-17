@@ -1,0 +1,41 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven Bundle Plugin
+Built-By: joakim
+Build-Jdk: 1.7.0_45
+Implementation-Vendor: Eclipse.org - Jetty
+Implementation-Version: 9.2.15.v20160210
+url: http://www.eclipse.org/jetty
+Export-Package: org.eclipse.jetty.server;version="9.2.15",org.eclipse.
+ jetty.server.jmx;version="9.2.15",org.eclipse.jetty.server.nio;versio
+ n="9.2.15",org.eclipse.jetty.server.handler.jmx;version="9.2.15",org.
+ eclipse.jetty.server.handler;version="9.2.15",org.eclipse.jetty.serve
+ r.session;version="9.2.15",org.eclipse.jetty.server.session.jmx;versi
+ on="9.2.15"
+Bundle-Classpath: .
+Tool: Bnd-1.15.0
+Bundle-Name: Jetty :: Server Core
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-Copyright: Copyright (c) 2008-2016 Mort Bay Consulting Pty. Ltd.
+Bundle-Vendor: Eclipse Jetty Project
+Bundle-Version: 9.2.15.v20160210
+Bnd-LastModified: 1455141194873
+Bundle-ManifestVersion: 2
+Bundle-Description: The core jetty server artifact.
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0, http://www
+ .eclipse.org/org/documents/epl-v10.php
+Import-Package: javax.naming,javax.net.ssl,javax.security.auth,javax.s
+ ervlet;version="[2.6.0,3.2)",javax.servlet.descriptor;version="[2.6.0
+ ,3.2)",javax.servlet.http;version="[2.6.0,3.2)",javax.sql,org.eclipse
+ .jetty.http;version="[9.2,10)",org.eclipse.jetty.io;version="[9.2,10)
+ ",org.eclipse.jetty.io.ssl;version="[9.2,10)",org.eclipse.jetty.jmx;r
+ esolution:=optional;version="9.1",org.eclipse.jetty.util;version="[9.
+ 2,10)",org.eclipse.jetty.util.annotation;version="[9.2,10)",org.eclip
+ se.jetty.util.component;version="[9.2,10)",org.eclipse.jetty.util.log
+ ;version="[9.2,10)",org.eclipse.jetty.util.resource;version="[9.2,10)
+ ",org.eclipse.jetty.util.ssl;version="[9.2,10)",org.eclipse.jetty.uti
+ l.statistic;version="[9.2,10)",org.eclipse.jetty.util.thread;version=
+ "[9.2,10)"
+Bundle-SymbolicName: org.eclipse.jetty.server
+Bundle-DocURL: http://www.eclipse.org/jetty
+

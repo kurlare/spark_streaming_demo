@@ -1,0 +1,12 @@
+<body>
+Provides support for secure IRC connections.
+<p>
+The {@link org.schwering.irc.lib.ssl.SSLIRCConnection} firstly tries to 
+use the <code>javax.net.ssl.*</code> classes which were added in J2SE 1.4.
+If this fails, it tries to load the classes of the JSSE library (from the 
+packages <code>javax.net.ssl.*</code> and <code>com.sun.net.ssl.*</code>).
+
+@since 1.10
+@version 1.00
+@author Christoph Schwering &lt;schwering@gmail.com&gt;
+</body>

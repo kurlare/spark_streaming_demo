@@ -1,0 +1,40 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven Bundle Plugin
+Built-By: joakim
+Build-Jdk: 1.7.0_45
+Implementation-Vendor: Eclipse.org - Jetty
+Implementation-Version: 9.2.15.v20160210
+url: http://www.eclipse.org/jetty
+Export-Package: org.eclipse.jetty.servlets;uses:="org.eclipse.jetty.se
+ rver,org.eclipse.jetty.http,javax.servlet,org.eclipse.jetty.util.log,
+ org.eclipse.jetty.util,org.eclipse.jetty.servlets.gzip,javax.servlet.
+ http,org.eclipse.jetty.io,org.eclipse.jetty.util.thread,org.eclipse.j
+ etty.util.annotation";version="9.2.15",org.eclipse.jetty.servlets.gzi
+ p;uses:="javax.servlet,org.eclipse.jetty.util,javax.servlet.http,org.
+ eclipse.jetty.server,org.eclipse.jetty.http,org.eclipse.jetty.util.lo
+ g,org.eclipse.jetty.server.handler,org.eclipse.jetty.http.pathmap,org
+ .eclipse.jetty.io";version="9.2.15"
+Bundle-Classpath: .
+Tool: Bnd-1.15.0
+Bundle-Name: Jetty :: Utility Servlets and Filters
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-Copyright: Copyright (c) 2008-2016 Mort Bay Consulting Pty. Ltd.
+Bundle-Vendor: Eclipse Jetty Project
+Bundle-Version: 9.2.15.v20160210
+Bnd-LastModified: 1455141697221
+Bundle-ManifestVersion: 2
+Bundle-Description: Utility Servlets from Jetty
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0, http://www
+ .eclipse.org/org/documents/epl-v10.php
+Import-Package: javax.servlet;version="[2.6.0,3.2)",javax.servlet.http
+ ;version="[2.6.0,3.2)",org.eclipse.jetty.http;version="[9.2,10)",org.
+ eclipse.jetty.http.pathmap;version="[9.2,10)",org.eclipse.jetty.io;ve
+ rsion="[9.2,10)",org.eclipse.jetty.server;version="[9.2,10)",org.ecli
+ pse.jetty.server.handler;version="[9.2,10)",org.eclipse.jetty.util;ve
+ rsion="[9.2,10)",org.eclipse.jetty.util.annotation;version="[9.2,10)"
+ ,org.eclipse.jetty.util.log;version="[9.2,10)",org.eclipse.jetty.util
+ .thread;version="[9.2,10)"
+Bundle-SymbolicName: org.eclipse.jetty.servlets
+Bundle-DocURL: http://www.eclipse.org/jetty
+

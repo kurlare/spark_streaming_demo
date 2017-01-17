@@ -1,0 +1,44 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven Bundle Plugin
+Built-By: joakim
+Build-Jdk: 1.7.0_45
+Implementation-Vendor: Eclipse.org - Jetty
+Implementation-Version: 9.2.15.v20160210
+url: http://www.eclipse.org/jetty
+Export-Package: org.eclipse.jetty.security;uses:="org.eclipse.jetty.se
+ rver,javax.servlet,org.eclipse.jetty.util.security,org.eclipse.jetty.
+ http,org.eclipse.jetty.server.handler,javax.servlet.annotation,org.ec
+ lipse.jetty.util.log,org.eclipse.jetty.util,javax.servlet.http,org.ec
+ lipse.jetty.security.authentication,javax.security.auth,org.eclipse.j
+ etty.util.resource,org.eclipse.jetty.util.component,org.ietf.jgss";ve
+ rsion="9.2.15",org.eclipse.jetty.security.authentication;uses:="javax
+ .servlet,org.eclipse.jetty.server,org.eclipse.jetty.security,org.ecli
+ pse.jetty.http,org.eclipse.jetty.util,javax.servlet.http,org.eclipse.
+ jetty.util.security,org.eclipse.jetty.util.log,org.eclipse.jetty.serv
+ er.session,javax.security.auth";version="9.2.15"
+Bundle-Classpath: .
+Tool: Bnd-1.15.0
+Bundle-Name: Jetty :: Security
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-Copyright: Copyright (c) 2008-2016 Mort Bay Consulting Pty. Ltd.
+Bundle-Vendor: Eclipse Jetty Project
+Bundle-Version: 9.2.15.v20160210
+Bnd-LastModified: 1455141247624
+Bundle-ManifestVersion: 2
+Bundle-Description: Jetty security infrastructure
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0, http://www
+ .eclipse.org/org/documents/epl-v10.php
+Import-Package: javax.security.auth,javax.security.cert,javax.servlet;
+ version="[2.6.0,3.2)",javax.servlet.annotation;version="[2.6.0,3.2)",
+ javax.servlet.http;version="[2.6.0,3.2)",org.eclipse.jetty.http;versi
+ on="[9.2,10)",org.eclipse.jetty.server;version="[9.2,10)",org.eclipse
+ .jetty.server.handler;version="[9.2,10)",org.eclipse.jetty.server.ses
+ sion;version="[9.2,10)",org.eclipse.jetty.util;version="[9.2,10)",org
+ .eclipse.jetty.util.component;version="[9.2,10)",org.eclipse.jetty.ut
+ il.log;version="[9.2,10)",org.eclipse.jetty.util.resource;version="[9
+ .2,10)",org.eclipse.jetty.util.security;version="[9.2,10)",org.ietf.j
+ gss
+Bundle-SymbolicName: org.eclipse.jetty.security
+Bundle-DocURL: http://www.eclipse.org/jetty
+

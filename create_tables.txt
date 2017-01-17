@@ -1,0 +1,47 @@
+
+
+## Create wiki_edits_parsed table to store data from wikipedia-parsed topic in Kafka
+## Note: You may have to put the field names in double quotes, i.e. "byteDiff"
+ 
+CREATE TABLE wiki_edits_parsed (
+	byteDiff int,
+	diffUrl text,
+	isBotEdit boolean,
+	isMinor boolean,
+	isNew boolean,
+	isUnpatrolled boolean,
+	summary text,
+	title text,
+	type text,
+	"user" text PRIMARY KEY
+	);
+ 
+## Create user_counts table for aggregations of historical data from wiki_edits_parsed
+
+SELECT 
+	"user", 
+	count("user") as no_of_edits 
+	INTO 
+	user_counts 
+	FROM 
+	wiki_edits_parsed 
+	GROUP BY
+	"user"
+	;
+
+## Create scored_data table to store modeling data with predictions from wikipedia-parsed topic in Kafka
+
+CREATE TABLE scored_data (
+	"user" text, 
+	type_bool int, 
+	summary_bytes int, 
+	total_byte_change int, 
+	addition_or_deletion int, 
+	"isMinor" int, 
+	"isUnpatrolled" int, 
+	"isNew" int, 
+	no_of_edits int, 
+	"isBotEdit" int, 
+	"predicted" int
+	);
+

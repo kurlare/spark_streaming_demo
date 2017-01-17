@@ -1,0 +1,27 @@
+<body>
+IRClib is a library for the client-side of IRC (Internet Relay Chat) 
+connections.
+<p>
+IRClib is RFC1459 and RFC2812 compliant. It's licensed under the GNU Lesser 
+General Public License, the Apache License 2.0 and the Eclipse Public License
+so that you can use and modify it for your purposes for free.
+<p>
+By instantiating the <code>{@link org.schwering.irc.lib.IRCConnection}</code> 
+class you can establish a new connection to an IRC server. The 
+<code>{@link org.schwering.irc.lib.IRCEventListener}</code> informs your class 
+about lines coming from the server which are parsed by the 
+<code>{@link org.schwering.irc.lib.IRCParser}</code>. The 
+<code>{@link org.schwering.irc.lib.IRCModeParser}</code> is especially made for 
+channel-modes.<br />
+To create a secure connection with SSL, instantiate the 
+<code>{@link org.schwering.irc.lib.ssl.SSLIRCConnection}</code>.
+<p>
+This project's home page is available at <a href="http://moepii.sourceforge.net" 
+target="_blank">http://moepii.sourceforge.net</a>.
+<p>
+If you're using IRClib, write a <a href="mailto:schwering@gmail.com">mail to me</a>
+so that I can put you on the using-IRClib-list!
+
+@version 1.10
+@author Christoph Schwering &lt;schwering@gmail.com&gt;
+</body>
