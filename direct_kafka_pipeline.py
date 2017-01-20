@@ -85,7 +85,7 @@ if __name__ == "__main__":
 
     ## Load the pretrained models to score the streaming data
     modelRF = RandomForestModel.load(sc, \
-        "/PATH_TO_REPO/models/myRandomForestClassificationModel.model")
+        "/PATH_TO_REPO/models/RFModel")
 
     modelPCA = PCAModel.load("/PATH_TO_REPO/models/pca_model.model")
 
