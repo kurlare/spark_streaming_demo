@@ -16,7 +16,7 @@ ______________
 
 **Data** - JSON and CSV files of raw and aggregated historical data.
 
-**Models** - PCA and Random Forest models used in direct_kafka_pipeline.py.
+**Models** - PCA and Random Forest models used in `direct_kafka_pipeline.py`.
 
 **jars** - .jar depencies that Spark needs for PostgreSQL & Spark Streaming with Kafka.
 
