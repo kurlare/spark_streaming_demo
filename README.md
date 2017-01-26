@@ -12,22 +12,22 @@ Create a demo asset that showcases the elegance and power of the Spark API.  The
 All four of these goals are achieved using Spark, with a handful of popular Python libraries sprinkled in.
 ______________
 
-#### This repo contains the following components:
+## Contents
 
-*Data* - JSON and CSV files of raw and aggregated historical data.
+**Data** - JSON and CSV files of raw and aggregated historical data.
 
-*Models* - PCA and Random Forest models used in direct_kafka_pipeline.py.
+**Models** - PCA and Random Forest models used in direct_kafka_pipeline.py.
 
-*jars* - .jar depencies that Spark needs for PostgreSQL & Spark Streaming with Kafka.
+**jars** - .jar depencies that Spark needs for PostgreSQL & Spark Streaming with Kafka.
 
-*Kafka* - Includes Kafka version 0.10.1.0.
+**Kafka** - Includes Kafka version 0.10.1.0.
 
-*direct_kafka_pipeline.py* - Script to ingest, transform, model and write data from the Wikipedia edits stream.
+**Scripts** - Contains `postgres_setup.txt` and `direct_kafka_pipeline.py`.
 
 
 #### Additional Requirements
 
-You will need:
+Please ensure you have installed the following components before working through the setup steps.
 
 1.  [Apache Spark](http://spark.apache.org/downloads.html) - I used version 2.0.0.
 
