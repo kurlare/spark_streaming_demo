@@ -1,0 +1,115 @@
+
+
+
+###################################################
+#### In this script you will set up PostgreSQL ####
+#### with database names, users, and tables    ####
+#### that reflect the schema of data from  the ####
+#### Wikipedia edits stream.  These will be    ####
+#### used in conjunction with the Spark job in ####
+#### direct_kafka_pipeline.py.                 ####
+###################################################
+
+
+#################
+## LAUNCH PSQL ##
+#################
+## Launch psql from the command-line, specifying the username to connect with:
+
+psql --username=postgress --password
+
+
+############################
+## CREATE DATABASES, USER ##
+############################
+
+## Execute the following script elements in the psql window to:
+## 1. Create a username of "kafka_streams_user" with a password of "postgres"
+## 2. Create a database named "kafka_streams_wiki_edits".
+## 3. Ensure your connection to the server as the new user
+
+## Confirm you don't already have an IBM user
+SELECT * FROM pg_roles;
+ 
+## Create the login account for IBM
+CREATE ROLE kafka_streams_user WITH PASSWORD 'postgres' SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN;
+ 
+## Create the default database for the IBM account
+CREATE DATABASE kafka_streams_user OWNER kafka_streams_user;
+ 
+## Create the database
+CREATE DATABASE kafka_streams_wiki_edits OWNER kafka_streams_user;
+ 
+## Switch your connection to the new database as the new user
+\connect kafka_streams_wiki_edits kafka_streams_user;
+ 
+
+###################
+## CREATE TABLES ##
+###################
+
+## Create `wiki_edits_parsed` table to store data from wikipedia-parsed topic in Kafka
+CREATE TABLE wiki_edits_parsed (
+    "byteDiff" int,
+    "diffUrl" text,
+    "isBotEdit" boolean,
+    "isMinor" boolean,
+    "isNew" boolean,
+    "isUnpatrolled" boolean,
+    summary text,
+    title text,
+    type text,
+    "user" text PRIMARY KEY
+    );
+ 
+## Create `user_counts` table for aggregations of historical data from wiki_edits_parsed
+## NOTE: This table is a placeholder; the current version of the demo neither reads nor writes to this table
+SELECT
+    "user",
+    count("user") as no_of_edits
+INTO
+    user_counts
+FROM
+    wiki_edits_parsed
+GROUP BY
+    "user";
+ 
+## Create `scored_data` table to store modeling data with predictions from wikipedia-parsed topic in Kafka
+CREATE TABLE scored_data (
+    "user" text,
+    type_bool int,
+    summary_bytes int,
+    total_byte_change int,
+    addition_or_deletion int,
+    "isMinor" int,
+    "isUnpatrolled" int,
+    "isNew" int,
+    no_of_edits int,
+    "isBotEdit" int,
+    "predicted" int
+    );
+
+
+###################################
+## EDIT direct_kafka_pipeline.py ##
+###################################
+ 
+## Go back and edit the direct_kafka_pipeline.py python script to make the database connection.
+##
+## Line 69 goes from
+##    url = 'jdbc:postgresql://127.0.0.1:5432/YOURDATABASENAME'
+## to
+##    url = 'jdbc:postgresql://127.0.0.1:5432/kafka_streams_wiki_edits'
+##
+## Line 71 goes from
+##    properties = {"user":"YOURUSERNAME", "password":"YOURPASSWORD"}
+## to
+##    properties = {"user":"kafka_streams_user", "password":"postgres"}
+##
+## Save direct_kafka_pipeline.py and you are done configuring PostgreSQL!
+
+
+
+
+
+
