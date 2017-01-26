@@ -99,7 +99,7 @@ You should see a stream of JSON start printing after a few moments.
 
 
 ### 5. PostgreSQL Tables
-Why don't you go and open up another terminal, because you're gonna need it. Once you've installed PostgreSQL and can run `psql` from the command line, get in to PostgreSQL and use the SQL statements in `create_tables.txt` to set up tables with the correct schema.  This will allow data to be written from Spark Streaming as it comes in.  You can test the tables with:
+Why don't you go and open up another terminal, because you're gonna need it. Once you've installed PostgreSQL, follow the instructions found in `/scripts/postgres_setup.txt`.  This will set up a database in PostgreSQL with the correct tables and schemas to allow incoming data to be writtento Spark Streaming.  You can test the tables with:
 
 > SELECT * FROM wiki_edits_parsed;
 >
