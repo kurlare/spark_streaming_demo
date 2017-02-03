@@ -10,6 +10,8 @@ Create a demo asset that showcases the elegance and power of the Spark API.  The
 4. Score each batch of incoming data with Spark MLlib and write the results to an external database
 
 All four of these goals are achieved using Spark, with a handful of popular Python libraries sprinkled in.
+
+**Here's a video of this demo:  https://youtu.be/xCAjoFZbMxA**
 ______________
 
 ## Contents
